@@ -34,9 +34,17 @@ export class ProviderLoginProvider {
   }
   Autenticar(usuario: any) {
     let urlAuth = "http://127.0.0.1:8000/rest-auth/login/";
+    
     let json = JSON.stringify(usuario);
     let params = json;
     let headers = new Headers({ "Content-Type": "application/json" });
-    return this.http.post(urlAuth, params, { headers: headers });
+    headers.append("Access-Control-Allow-Credentials", "true");
+    headers.append("Access-Control-Allow-Origin", "*");
+    headers.append("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
+
+    return this.http.post(urlAuth, params, { headers: headers, withCredentials: true })
+    .map(data =>{
+      console.log(data);
+    });
   }
 }

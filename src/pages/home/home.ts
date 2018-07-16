@@ -32,6 +32,7 @@ export class HomePage {
       .getPeticion()
       .map(da => {
         this.data = da;
+        console.log(this.data);
       })
       .subscribe(data => {
         this.data = data;
